@@ -6,7 +6,7 @@
 [![](https://img.shields.io/badge/Shiny-shinylive-blue?style=flat&labelColor=white&logo=RStudio&logoColor=blue)](https://matt-dray.github.io/cran-deadlines/)
 <!-- badges: end -->
 
-[A simple Shinylive app](https://matt-dray.github.io/cran-deadlines) that highlights R packages on CRAN that are currently nearing their issue-response deadlines, according to `tools::CRAN_package_db()`. 
+A simple Shinylive app that highlights R packages on CRAN that are currently nearing their issue-response deadlines, according to `tools::CRAN_package_db()`. 
 
 The app is available on the web but computations run in your browser: [matt-dray.github.io/cran-deadlines](https://matt-dray.github.io/cran-deadlines)
 
