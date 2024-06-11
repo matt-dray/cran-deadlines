@@ -1,5 +1,5 @@
 colour_days <- function(value) {
-    if (value == 1) return("bg-red")
+    if (value < 2) return("bg-red")
     if (value %in% 2:7) return("bg-orange")
     "bg-yellow"
 }
@@ -8,7 +8,7 @@ pluralise <- function(value) if (value == 1) "day" else "days"
 
 ui <- bslib::page_fillable(
     theme = bslib::bs_theme(preset = "bootstrap"),
-    padding = 75,
+    padding = 100,
     fillable_mobile = TRUE,
     title = "CRAN Deadlines",
     bslib::input_dark_mode(id = "dark_mode", mode = "dark"),
@@ -37,9 +37,13 @@ server <- function(input, output, session) {
                 paste(pkg$Days, pluralise(pkg$Days))
             ),
             bslib::card_title(
-                htmltools::a(href = pkg$URL, paste0("{", pkg$Package, "}"))
+                htmltools::a(
+                    href = pkg$URL,
+                    paste0("{", pkg$Package, "}"),
+                    .noWS = "after"
+                ),
+                ":", pkg$Title
             ),
-            bslib::card_body(shiny::markdown(paste0("> ", pkg$Title))),
             bslib::card_footer(
                 htmltools::a(
                     href = paste0(
