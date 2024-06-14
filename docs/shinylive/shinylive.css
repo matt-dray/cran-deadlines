@@ -1,5 +1,5 @@
-/* Shinylive 0.2.3
-// Copyright 2023 RStudio, PBC */
+/* Shinylive 0.3.0
+// Copyright 2024 RStudio, PBC */
 /* src/Components/App.css */
 :root {
   --colors-grey: grey;
@@ -49,6 +49,7 @@
 }
 .shinylive-container.viewer {
   --pad: 0;
+  min-width: unset;
 }
 .shinylive-container > div {
   border-radius: var(--panel-roundness);

@@ -38,7 +38,12 @@ export type DistProxy<U> = U extends RWorker.RObject ? RProxy<U> : U;
  */
 export type RProxify<T> = T extends Array<any> ? Promise<DistProxy<T[0]>[]> : T extends (...args: infer U) => any ? (...args: {
     [V in keyof U]: DistProxy<U[V]>;
-}) => RProxify<ReturnType<T>> : Promise<DistProxy<T>>;
+}) => RProxify<ReturnType<T>> : T extends {
+    result: RWorker.RObject;
+    output: RWorker.RObject;
+} ? Promise<{
+    [U in keyof T]: DistProxy<T[U]>;
+}> : Promise<DistProxy<T>>;
 /**
  * Create an {@link RProxy} based on an {@link RWorker.RObject} type parameter.
  *
@@ -46,12 +51,12 @@ export type RProxify<T> = T extends Array<any> ? Promise<DistProxy<T[0]>[]> : T 
  * {@link RWorker.RObject} on the main thread. An {@link RProxy} object has the
  * same instance methods as the given {@link RWorker.RObject} parameter, with
  * the following differences:
- * * Method arguments take `RProxy` in place of {@link RWorker.RObject}.
+ * - Method arguments take `RProxy` in place of {@link RWorker.RObject}.
  *
- * * Where an {@link RWorker.RObject} would be returned, an `RProxy` is
+ * - Where an {@link RWorker.RObject} would be returned, an `RProxy` is
  *   returned instead.
  *
- * * All return types are wrapped in a Promise.
+ * - All return types are wrapped in a Promise.
  *
  * If required, the {@link Payload.WebRPayloadPtr} object associated with the
  * proxy can be accessed directly through the `_payload` property.
@@ -87,8 +92,8 @@ export type ProxyConstructor<T, R> = (T extends abstract new (...args: infer U) 
  * {@link RWorker.RObject} static method is called.
  * @internal
  */
-export declare function targetMethod(chan: ChannelMain, prop: string): any;
-export declare function targetMethod(chan: ChannelMain, prop: string, payload: WebRPayloadPtr): any;
+export declare function targetMethod(chan: ChannelMain, prop: string): unknown;
+export declare function targetMethod(chan: ChannelMain, prop: string, payload: WebRPayloadPtr): unknown;
 /**
  * Proxy an R object.
  *

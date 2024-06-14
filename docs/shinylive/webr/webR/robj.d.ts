@@ -40,7 +40,7 @@ export type Complex = {
     re: number;
     im: number;
 };
-export type WebRDataRaw = number | string | boolean | undefined | null | void | Complex | Error | ArrayBuffer | ArrayBufferView | Array<WebRDataRaw> | Map<WebRDataRaw, WebRDataRaw> | Set<WebRDataRaw> | {
+export type WebRDataRaw = number | string | boolean | undefined | null | void | Complex | Error | ArrayBuffer | ArrayBufferView | ImageBitmap | Array<WebRDataRaw> | Map<WebRDataRaw, WebRDataRaw> | Set<WebRDataRaw> | {
     [key: string]: WebRDataRaw;
 };
 export type NamedEntries<T> = [string | null, T][];
@@ -54,7 +54,7 @@ export type NamedObject<T> = {
  * and also as a general return type when converting R objects into JavaScript.
  *
  */
-export type WebRData = RMain.RObject | RWorker.RObjectBase | RWorker.RObject | WebRDataRaw | WebRDataJs | WebRData[] | {
+export type WebRData = RMain.RObject | RWorker.RObjectBase | RWorker.RObject | WebRDataRaw | WebRDataJs | WebRData[] | ArrayBuffer | ArrayBufferView | {
     [key: string]: WebRData;
 };
 /**
@@ -62,10 +62,10 @@ export type WebRData = RMain.RObject | RWorker.RObjectBase | RWorker.RObject | W
  * into R atomic vectors.
  * @typeParam T The JavaScript scalar type associated with the atomic vector.
  */
-export type WebRDataAtomic<T> = WebRDataScalar<T> | (T | null)[] | WebRDataJsAtomic<T> | NamedObject<T | null>;
+export type WebRDataAtomic<T> = WebRDataScalar<T> | WebRDataJsAtomic<T> | NamedObject<T | null> | ([T] extends [number] ? ArrayBuffer | ArrayBufferView | (number | null)[] : (T | null)[]);
 /**
  * `WebRDataJs` objects form a tree structure, used when serialising R objects
- * into a JavaScript respresentation.
+ * into a JavaScript representation.
  *
  * Nested R objects are serialised using the {@link WebRDataJsNode} type,
  * forming branches in the resulting tree structure, with leaves formed by the
