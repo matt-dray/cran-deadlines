@@ -30,7 +30,7 @@ get_cran_db <- function() {
 }
 
 ui <- bslib::page_fillable(
-  htmltools::HTML(r"{<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⌛️</text></svg>">}"), # https://twitter.com/LeaVerou/status/1241619866475474946
+  htmltools::HTML("<link rel='icon' href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⌛️</text></svg>'>"), # https://twitter.com/LeaVerou/status/1241619866475474946
   theme = bslib::bs_theme(preset = "bootstrap"),
   padding = 75,
   fillable_mobile = TRUE,
@@ -43,7 +43,7 @@ ui <- bslib::page_fillable(
     ),
     bslib::input_dark_mode(id = "dark_mode", mode = "dark")
   ),
-  htmltools::h1("⌛️ CRAN Deadlines"),
+  htmltools::h1("⌛️CRAN Deadlines"),
   shiny::htmlOutput("cards", inline = TRUE)
 )
 
@@ -59,7 +59,7 @@ server <- function(input, output, session) {
   } else {
     db <- db |> sort_by(~list(Deadline, Package))
   }
-  
+
   cards_list <- vector("list", length = nrow(db))
 
   for (i in seq(nrow(db))) {
