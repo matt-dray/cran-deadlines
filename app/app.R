@@ -6,6 +6,29 @@ colour_days <- function(value) {
 
 pluralise <- function(value) if (value == 1) "day" else "days"
 
+# credit: Winston Chang
+# source: https://github.com/posit-dev/r-shinylive/issues/45#issuecomment-1885233647
+is_emscripten <- function() Sys.info()[["sysname"]] == "Emscripten"
+
+get_cran_db <- function() {
+  if (is_emscripten()) {
+    tmp_file <- tempfile(pattern = "crandb")
+    # Need to create a modified URL leveraging a CORS-friendly proxy
+    # credit: GH user alekrutkowski
+    # source: https://github.com/r-wasm/webr/issues/252#issuecomment-1690142510
+    download.file(
+      url = "https://corsproxy.io/?https%3A%2F%2FCRAN.R-project.org%2Fweb%2Fpackages%2Fpackages.rds",
+      destfile = tmp_file
+    )
+
+    df <- as.data.frame(readRDS(tmp_file))
+    unlink(tmp_file)
+  } else {
+    df <- tools::CRAN_package_db()
+  }
+  return(df)
+}
+
 ui <- bslib::page_fillable(
   htmltools::HTML(r"{<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⌛️</text></svg>">}"), # https://twitter.com/LeaVerou/status/1241619866475474946
   theme = bslib::bs_theme(preset = "bootstrap"),
@@ -26,7 +49,7 @@ ui <- bslib::page_fillable(
 
 server <- function(input, output, session) {
 
-  db <- tools::CRAN_package_db()
+  db <- get_cran_db()
   db <- db[!is.na(db$Deadline), c("Deadline", "Package", "Title")]
   db$URL <- paste0("https://CRAN.R-project.org/package=", db$Package)
   db$Deadline <- as.Date(db$Deadline)
