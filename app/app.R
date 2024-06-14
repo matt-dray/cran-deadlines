@@ -54,8 +54,12 @@ server <- function(input, output, session) {
   db$URL <- paste0("https://CRAN.R-project.org/package=", db$Package)
   db$Deadline <- as.Date(db$Deadline)
   db$Days <- db$Deadline - Sys.Date()
-  db <- db |> sort_by(~list(Deadline, Package))
-
+  if (is_emscripten()) {
+    db <- db[order(db$Deadline, db$Package),]
+  } else {
+    db <- db |> sort_by(~list(Deadline, Package))
+  }
+  
   cards_list <- vector("list", length = nrow(db))
 
   for (i in seq(nrow(db))) {
