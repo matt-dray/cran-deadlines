@@ -3,18 +3,20 @@
 
 <!-- badges: start -->
 [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
-[![](https://img.shields.io/badge/Shiny-shinylive-447099?style=flat&labelColor=white&logo=Posit&logoColor=447099)](https://matt-dray.github.io/cran-deadlines)
+[![](https://img.shields.io/badge/Shiny-shinyapps.io-447099?style=flat&labelColor=white&logo=Posit&logoColor=447099)](https://mattdray.shinyapps.io/cran-deadlines)
 [![Blog
 post](https://img.shields.io/badge/rostrum.blog-post-008900?labelColor=000000&logo=data%3Aimage%2Fgif%3Bbase64%2CR0lGODlhEAAQAPEAAAAAABWCBAAAAAAAACH5BAlkAAIAIf8LTkVUU0NBUEUyLjADAQAAACwAAAAAEAAQAAAC55QkISIiEoQQQgghRBBCiCAIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAAh%2BQQJZAACACwAAAAAEAAQAAAC55QkIiESIoQQQgghhAhCBCEIgiAIgiAIQiAIgSAIgiAIQiAIgRAEQiAQBAQCgUAQEAQEgYAgIAgIBAKBQBAQCAKBQEAgCAgEAoFAIAgEBAKBIBAQCAQCgUAgEAgCgUBAICAgICAgIBAgEBAgEBAgEBAgECAgICAgECAQIBAQIBAgECAgICAgICAgECAQECAQICAgICAgICAgEBAgEBAgEBAgICAgICAgECAQIBAQIBAgECAgICAgIBAgECAQECAQIBAgICAgIBAgIBAgEBAgECAgECAgICAgICAgECAgECAgQIAAAQIKAAA7)](https://www.rostrum.blog/posts/2024-06-12-cran-db/)
 <!-- badges: end -->
 
 ## About
 
-A simple [Shinylive](https://posit-dev.github.io/r-shinylive/) app that highlights R packages on [CRAN](https://cran.r-project.org/) that are currently nearing their archival deadlines, according to `tools::CRAN_package_db()`. Read more in [the associated blog post](https://www.rostrum.blog/posts/2024-06-12-cran-db/). Access the app here: [matt-dray.github.io/cran-deadlines/](https://matt-dray.github.io/cran-deadlines/)
+A simple Shiny app that highlights R packages on [CRAN](https://cran.r-project.org/) that are currently nearing their archival deadlines, according to `tools::CRAN_package_db()`. Access the app at [mattdray.shinyapps.io/cran-deadlines/](https://mattdray.shinyapps.io/cran-deadlines/)[^1] and read more in [the associated blog post](https://www.rostrum.blog/posts/2024-06-12-cran-db/).
+
+[^1]: There's also [a Shinylive version](https://matt-dray.github.io/cran-deadlines/) of the app, but it [isn't working as intended](https://github.com/matt-dray/cran-deadlines/issues/6).
 
 ## Acknowledgements
 
-Built primarily with [Shiny](https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html) and [{bslib}](https://rstudio.github.io/bslib/), with many thanks to the CRAN team and all package maintainers. Special thanks to [Eric Nantz](https://github.com/rpodcast), who [fixed my Shinylive problems](https://github.com/matt-dray/cran-deadlines/pull/3).
+Built primarily with [Shiny](https://shiny.posit.co/r/getstarted/shiny-basics/lesson1/index.html) and [{bslib}](https://rstudio.github.io/bslib/), with many thanks to the CRAN team and all package maintainers. Special thanks to [Eric Nantz](https://github.com/rpodcast), who fixed my [initial Shinylive problems](https://github.com/matt-dray/cran-deadlines/pull/3).
 
 ## Similar projects
 
