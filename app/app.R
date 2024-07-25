@@ -30,7 +30,17 @@ get_cran_db <- function() {
 }
 
 ui <- bslib::page_fillable(
-  htmltools::HTML("<link rel='icon' href='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⌛️</text></svg>'>"), # https://twitter.com/LeaVerou/status/1241619866475474946
+  # Emoji favicon
+  # credit: Twitte user Lea Verou
+  # source: https://twitter.com/LeaVerou/status/1241619866475474946
+  htmltools::HTML(
+    paste0(
+      "<link rel='icon' href='data:image/svg+xml,",
+      "<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>",
+      "<text y=%22.9em%22 font-size=%2290%22>⌛️</text>",
+      "</svg>'>"
+    )
+  ),
   theme = bslib::bs_theme(preset = "bootstrap"),
   padding = 75,
   fillable_mobile = TRUE,
@@ -39,6 +49,7 @@ ui <- bslib::page_fillable(
     width = 12,
     htmltools::a(
       href = "https://github.com/matt-dray/cran-deadlines",
+      target = "_blank",
       fontawesome::fa("github", height = "1.45em")
     ),
     bslib::input_dark_mode(id = "dark_mode", mode = "dark")
@@ -74,6 +85,7 @@ server <- function(input, output, session) {
       bslib::card_title(
         htmltools::a(
           href = pkg$URL,
+          target = "_blank",
           paste0("{", pkg$Package, "}"),
           .noWS = "after"
         ),
@@ -86,6 +98,7 @@ server <- function(input, output, session) {
             pkg$Package,
             ".html"
           ),
+          target = "_blank",
           "Issues"
         ),
         "need fixing before",
